@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*; //já importa todos os que estão comentados abaixo
 
+import com.github.app.model.medico.DadosAtualizacaoMedico;
+
 // import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.RequestBody;
 // import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +51,13 @@ public class MedicoController {
     public Page<DadosListagemMedico> listarPorPagina(Pageable paginacao) { //Page tem que importar o do domain (org.springframework.data.domain.Page). Pageable também.
         return repository.findAll(paginacao).map(DadosListagemMedico::new);
         //return repository.findAll().stream().map(DadosListagemMedico::new).toList(); 
+    }
+
+    @PutMapping
+    public void atualizar(@RequestBody DadosAtualizacaoMedico dados) {
+        var medico = repository.getReferenceById(dados.id());
+        // var é uma palavra reservada em Java que permite declarar uma variável sem especificar o tipo dela. O tipo da variável é inferido pelo compilador com base no valor que foi atribuído a ela.
+        medico.atualizarInformacoes(dados);
     }
 
 }
