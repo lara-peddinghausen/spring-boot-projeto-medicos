@@ -35,7 +35,9 @@ public class Medico {
 
     private String nome;
     private String email;
+    private String telefone;
     private String crm;
+    private Boolean ativo = true; //Toda vez que um médico for cadastrado, ele vai aparecer como ativo(true)
 
     
     @Enumerated(EnumType.STRING) //SPRING JPA - informa para o BD que o atributo é do tipo enum
@@ -48,6 +50,7 @@ public class Medico {
     public Medico(DadosCadastroMedico dados) {
         this.nome = dados.nome(); //() => para diferenciar de um construtor que está tendo uma conversão de uma que não está tendo
         this.email = dados.email();
+        this.telefone = dados.telefone();
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();      
         this.endereco = new Endereco(dados.endereco());
@@ -65,6 +68,11 @@ public class Medico {
         if(dados.endereco() != null) {
             this.endereco.atualizarInformacoes(dados.endereco());
         }
+    }
+
+    //Método responsável por alterar o status do médico de true para false
+    public void exclusaoLogica() {
+        this.ativo = false;
     }
 
 }

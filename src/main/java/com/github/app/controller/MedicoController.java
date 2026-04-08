@@ -19,6 +19,8 @@ import com.github.app.model.medico.DadosListagemMedico;
 import com.github.app.model.medico.Medico;
 import com.github.app.model.medico.MedicoRepository;
 
+import jakarta.transaction.Transactional;
+
 @RestController // SPRING WEB - Informa para o Springboot que abaixo é uma classe controladora
                 // de requisições (GET-POST-PUT-DELETE)
 @RequestMapping("/medicos") // SPRING WEB - Cria um caminho (endpoint) para a classe MedicoCotroller
@@ -28,9 +30,9 @@ public class MedicoController {
     private MedicoRepository repository; // tem que importar
 
     @PostMapping // SPRING WEB - Informa que o método abaixo é do tipo POST (cadastrar)
+    @Transactional // SPRING DATA JPA - Informa ao spring boot que o método irá alterar o BD. Nesse caso, incluir. (importar jakarta.transaction.Transactional;)
     public void cadastrar(@RequestBody DadosCadastroMedico dados) {
         repository.save(new Medico(dados));
-
     }
 
     @GetMapping("todos") // SRPING WEB - Informa que o método abaixo é do tipo GET (buscar/ler)
@@ -54,10 +56,25 @@ public class MedicoController {
     }
 
     @PutMapping
+    @Transactional // SPRING DATA JPA - Informa ao spring boot que o método irá alterar o BD. (importar jakarta.transaction.Transactional;)
     public void atualizar(@RequestBody DadosAtualizacaoMedico dados) {
         var medico = repository.getReferenceById(dados.id());
         // var é uma palavra reservada em Java que permite declarar uma variável sem especificar o tipo dela. O tipo da variável é inferido pelo compilador com base no valor que foi atribuído a ela.
         medico.atualizarInformacoes(dados);
     }
 
+    // Exclusão - AQUI ESTOU EXCLUINDO MESMO
+    @DeleteMapping("/{id}") //estou passando o caminho (path) do id que será excluído
+    @Transactional // SPRING DATA JPA - Informa ao spring boot que o método irá alterar o BD. Nesse caso, excluir. (importar jakarta.transaction.Transactional;)
+    public void excluir(@PathVariable Integer id){ // PathVariable informa que o spring boot precisa pegar o caminho variável {id} e entender que é um campo chamado id do Médico.
+        repository.getReferenceById(id);
+    }
+
+    // Exclusão lógica - Uma regra de negócio que permite que um resgitro seja 'excluído' sem ser apagado do banco de dados
+    @DeleteMapping("/{id}") //estou passando o caminho (path) do id que será excluído
+    @Transactional
+    public void alterarStatus(@PathVariable Integer id) {
+        var medico = repository.getReferenceById(id);
+        medico.exclusaoLogica();
+    }
 }
