@@ -67,14 +67,14 @@ public class MedicoController {
     @DeleteMapping("/{id}") //estou passando o caminho (path) do id que será excluído
     @Transactional // SPRING DATA JPA - Informa ao spring boot que o método irá alterar o BD. Nesse caso, excluir. (importar jakarta.transaction.Transactional;)
     public void excluir(@PathVariable Integer id){ // PathVariable informa que o spring boot precisa pegar o caminho variável {id} e entender que é um campo chamado id do Médico.
-        repository.getReferenceById(id);
+        repository.deleteById(id);
     }
 
     // Exclusão lógica - Uma regra de negócio que permite que um resgitro seja 'excluído' sem ser apagado do banco de dados
-    @DeleteMapping("/{id}") //estou passando o caminho (path) do id que será excluído
-    @Transactional
-    public void alterarStatus(@PathVariable Integer id) {
-        var medico = repository.getReferenceById(id);
-        medico.exclusaoLogica();
-    }
+    // @DeleteMapping("/{id}") //estou passando o caminho (path) do id que será excluído
+    // @Transactional
+    // public void alterarStatus(@PathVariable Integer id) {
+    //     var medico = repository.getReferenceById(id);
+    //     medico.exclusaoLogica();
+    // }
 }

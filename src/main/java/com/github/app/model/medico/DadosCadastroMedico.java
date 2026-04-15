@@ -23,7 +23,7 @@ public record DadosCadastroMedico(
 
     String telefone,
 
-    String crm, 
+    String crm,
 
     @NotNull //não é possível usar NotBlank porque não é string
     Especialidade especialidade,  //uma classe só para especialidades, onde deixo pré definido quais são as especialidades aceitas pelo sistema
