@@ -14,7 +14,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroMedico(
 
-    @NotBlank //verifica se o campo está preenchido -> só consegue utulizar em Strings
+    @NotBlank //verifica se o campo está preenchido -> só consegue utilizar em Strings
     String nome, 
 
     @Email //verifica se é um e-mail válido

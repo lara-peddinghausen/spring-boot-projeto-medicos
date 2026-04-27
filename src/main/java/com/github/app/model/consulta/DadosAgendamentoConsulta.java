@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 
 public record DadosAgendamentoConsulta(
 
-    Integer medicoId,  // para pegar o id do médico
-    Integer pacienteId, // para pegar o id do paciente
+    Integer medicoId,  // id do médico que será associado à consulta
+    Integer pacienteId, // id do paciente que será associado à consulta
     String observacao,
     Status status,
     LocalDateTime data

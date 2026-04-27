@@ -1,7 +1,8 @@
-# Projeto Médicos - Spring Boot
+# Vollmed - Spring Boot
 
-Este projeto está sendo desenvolvido durante as aulas da faculdade com o objetivo de aprender e praticar o desenvolvimento de aplicações backend utilizando **Spring Boot**.
-Novas funcionalidades serão adicionadas conforme o avanço das aulas.
+API REST (Back-end) desenvolvida com Spring Boot para gerenciamento de uma clínica médica, incluindo médicos, pacientes e consultas.
+
+Projeto acadêmico em desenvolvimento, criado com o objetivo de praticar conceitos de desenvolvimento backend com Spring Boot.
 
 ---
 
