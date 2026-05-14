@@ -22,7 +22,7 @@ public class Paciente {
     private String cpf;
     private String email;
     private String telefone;
-    private Boolean ativo = true;
+    // private Boolean ativo = true;
 
     @Embedded
     private Endereco endereco;
@@ -47,8 +47,8 @@ public class Paciente {
         }
     }
 
-    public void exclusaoLogica() {
-        this.ativo = false;
-    }
+    // public void exclusaoLogica() {
+    //     this.ativo = false;
+    // }
 
 }
